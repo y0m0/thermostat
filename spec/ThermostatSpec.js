@@ -23,4 +23,8 @@ describe("Thermostat", function() {
     expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE - 1);
   });
 
+  it("Has a minimum temperature of 10", function(){
+    for(var i = 0; i < 10; i++) { thermostat.decreaseTemperature(); }
+    expect(function(){ thermostat.decreaseTemperature(); }).toThrow(new Error('Minimum temperature is 10 degrees'));
+  });
 });
