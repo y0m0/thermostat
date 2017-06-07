@@ -65,4 +65,22 @@ describe("Thermostat", function() {
       expect(function(){ thermostat.increaseTemperature(); }).toThrow(new Error('Maximum temperature is 32 degrees'));
     });
   });
+
+  describe("currentEnergyUsage", function() {
+
+    it("Returns 'Low usage' when temperature is <18 degrees", function() {
+      spyOn(thermostat, '_temperature').and.returnValue(17);
+      expect(thermostat.currentEnergyUsage()).toEqual('Low usage')
+    });
+
+    it("Returns 'Medium usage' when temperature is between 18 and 24 degrees", function() {
+      spyOn(thermostat, '_temperature').and.returnValue(20);
+      expect(thermostat.currentEnergyUsage()).toEqual('Medium usage')
+    });
+
+    it("Returns 'High usage' when temperature is >24 degrees", function() {
+      spyOn(thermostat, '_temperature').and.returnValue(30);
+      expect(thermostat.currentEnergyUsage()).toEqual('High usage')
+    });
+  });
 });
