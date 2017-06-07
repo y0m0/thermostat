@@ -27,4 +27,19 @@ describe("Thermostat", function() {
     for(var i = 0; i < 10; i++) { thermostat.decreaseTemperature(); }
     expect(function(){ thermostat.decreaseTemperature(); }).toThrow(new Error('Minimum temperature is 10 degrees'));
   });
+
+  it("Is in power saving mode by default", function() {
+    expect(thermostat.isPowerSaving()).toBe(true);
+  });
+
+  it("Can turn off power saving mode", function() {
+    thermostat.powerSavingOff();
+    expect(thermostat.isPowerSaving()).toBe(false);
+  });
+
+  it("Can turn on power saving mode", function() {
+    thermostat.powerSavingOff();
+    thermostat.powerSavingOn();
+    expect(thermostat.isPowerSaving()).toBe(true);
+  });
 });
