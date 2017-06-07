@@ -3,18 +3,24 @@
 describe("Thermostat", function() {
 
   var thermostat;
+  const DEFAULT_TEMPERATURE = 20
 
   beforeEach(function() {
     thermostat = new Thermostat();
   });
 
   it("Starts at 20 degrees", function() {
-    expect(thermostat.temperature()).toEqual(20);
+    expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE);
   });
 
-  it("can increase the temperature", function(){
+  it("Can increase the temperature", function(){
     thermostat.increaseTemperature();
-    expect(thermostat.temperature()).toEqual(21);
+    expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE + 1);
+  });
+
+  it("Can decrease the temperature", function() {
+    thermostat.decreaseTemperature();
+    expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE - 1);
   });
 
 });
