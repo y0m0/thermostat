@@ -11,7 +11,8 @@ Thermostat.prototype.temperature = function() {
 };
 
 Thermostat.prototype.increaseTemperature = function(){
-  if (this.isPowerSaving && this._temperature >= 25 ) throw new Error('Maximum temperature in power saving mode is 25 degrees') 
+  if (this._temperature >= 32) throw new Error('Maximum temperature is 32 degrees')
+  if (this.isPowerSaving() && this._temperature >= 25) throw new Error('Maximum temperature in power saving mode is 25 degrees')
   this._temperature ++;
 };
 
