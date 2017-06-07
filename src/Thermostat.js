@@ -1,8 +1,9 @@
 'use strict';
 
 var Thermostat = function() {
-  this._temperature = 20;
+  this._DEFAULT_TEMPERATURE = 20;
   this._MINIMUM_TEMPERATURE = 10;
+  this._temperature = this._DEFAULT_TEMPERATURE;
   this.powerSaving = true;
 };
 
@@ -34,10 +35,10 @@ Thermostat.prototype.powerSavingOn = function() {
 };
 
 Thermostat.prototype.resetTemperature = function() {
-  this._temperature = 20;
+  this._temperature = this._DEFAULT_TEMPERATURE;
 };
 
-Thermostat.prototype.currentEnergyUsage = function () {
+Thermostat.prototype.currentEnergyUsage = function() {
   if (this._temperature() < 18) {
     return "Low usage";
   } else if (this._temperature() < 25) {

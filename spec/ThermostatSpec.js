@@ -3,24 +3,23 @@
 describe("Thermostat", function() {
 
   var thermostat;
-  const DEFAULT_TEMPERATURE = 20
 
   beforeEach(function() {
     thermostat = new Thermostat();
   });
 
   it("Starts at 20 degrees", function() {
-    expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE);
+    expect(thermostat.temperature()).toEqual(thermostat._DEFAULT_TEMPERATURE);
   });
 
   it("Can increase the temperature", function(){
     thermostat.increaseTemperature();
-    expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE + 1);
+    expect(thermostat.temperature()).toEqual(thermostat._DEFAULT_TEMPERATURE + 1);
   });
 
   it("Can decrease the temperature", function() {
     thermostat.decreaseTemperature();
-    expect(thermostat.temperature()).toEqual(DEFAULT_TEMPERATURE - 1);
+    expect(thermostat.temperature()).toEqual(thermostat._DEFAULT_TEMPERATURE - 1);
   });
 
   it("Has a minimum temperature of 10", function(){
@@ -46,7 +45,7 @@ describe("Thermostat", function() {
   it("Can reset the temperature to 20 degrees", function() {
     thermostat.increaseTemperature();
     thermostat.resetTemperature();
-    expect(thermostat.temperature()).toEqual(20);
+    expect(thermostat.temperature()).toEqual(thermostat._DEFAULT_TEMPERATURE);
   });
 
   describe("Power Saving mode On", function() {
@@ -74,7 +73,7 @@ describe("Thermostat", function() {
     });
 
     it("Returns 'Medium usage' when temperature is between 18 and 24 degrees", function() {
-      spyOn(thermostat, '_temperature').and.returnValue(20);
+      spyOn(thermostat, '_temperature').and.returnValue(21);
       expect(thermostat.currentEnergyUsage()).toEqual('Medium usage')
     });
 
