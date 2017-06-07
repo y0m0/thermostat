@@ -31,17 +31,28 @@ describe("Thermostat", function() {
     expect(thermostat.isPowerSaving()).toBe(true);
   });
 
-  it("Can toggle power saving mode", function() {
-    thermostat.togglePowerSaving();
-    expect(thermostat.isPowerSaving()).toBe(false);
-    thermostat.togglePowerSaving();
-    expect(thermostat.isPowerSaving()).toBe(true);
-  });
-
   it("Can reset the temperature to 20 degrees", function() {
     thermostat.increaseTemperature();
     thermostat.resetTemperature();
     expect(thermostat.temperature()).toEqual(thermostat._DEFAULT_TEMPERATURE);
+  });
+
+  describe("togglePowerSaving", function() {
+
+    it("Can toggle power saving mode", function() {
+      thermostat.togglePowerSaving();
+      expect(thermostat.isPowerSaving()).toBe(false);
+      thermostat.togglePowerSaving();
+      expect(thermostat.isPowerSaving()).toBe(true);
+    });
+
+    it("Resets temperature to maximum of 25 degrees when turned on", function() {
+      thermostat.togglePowerSaving();
+      for(var i = 0; i < 10; i++) { thermostat.increaseTemperature(); }
+      thermostat.togglePowerSaving();
+      expect(thermostat.temperature()).toEqual(25);
+    });
+
   });
 
   describe("Power Saving mode On", function() {

@@ -28,6 +28,7 @@ Thermostat.prototype.isPowerSaving = function() {
 
 Thermostat.prototype.togglePowerSaving = function() {
   this.powerSaving = !this.powerSaving
+  if (this.isPowerSaving() && this._temperature > 25) this._temperature = 25
 }
 
 Thermostat.prototype.resetTemperature = function() {
