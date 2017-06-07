@@ -8,10 +8,14 @@ $( document ).ready(function() {
   function updatePowerSaving() {
     switch(thermostat.isPowerSaving()) {
       case true:
-        return "On"
+        return 'On';
       case false:
-        return "Off"
+        return 'Off';
     }
+  }
+
+  function updateEnergyUsage() {
+    $('#energy>p').text(thermostat.currentEnergyUsage());
   }
 
   updateTemperature();
@@ -19,16 +23,19 @@ $( document ).ready(function() {
   $('#temp-up').on('click', function(){
     thermostat.increaseTemperature();
     updateTemperature();
+    updateEnergyUsage();
   });
 
   $('#temp-down').on('click', function() {
     thermostat.decreaseTemperature();
     updateTemperature();
+    updateEnergyUsage();
   });
 
   $('#temp-reset').on('click', function() {
     thermostat.resetTemperature();
     updateTemperature();
+    updateEnergyUsage();
   });
 
   $('#toggle-power-saving').on('click', function() {
