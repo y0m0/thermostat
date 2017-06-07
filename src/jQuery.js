@@ -1,20 +1,24 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
 
-  $('#temperature').text(thermostat.temperature());
+  function updateTemperature() {
+    $('#temperature').text(thermostat.temperature());
+  }
+
+  updateTemperature();
 
   $('#temp-up').on('click', function(){
     thermostat.increaseTemperature();
-    $('#temperature').text(thermostat.temperature());
+    updateTemperature();
   });
 
   $('#temp-down').on('click', function() {
     thermostat.decreaseTemperature();
-    $('#temperature').text(thermostat.temperature());
+    updateTemperature();
   });
 
   $('#temp-reset').on('click', function() {
     thermostat.resetTemperature();
-    $('#temperature').text(thermostat.temperature());
+    updateTemperature();
   });
 });
