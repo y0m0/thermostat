@@ -2,7 +2,16 @@ $( document ).ready(function() {
   var thermostat = new Thermostat();
 
   function updateTemperature() {
-    $('#temperature').text(thermostat.temperature());
+    $('#temperature>p').text(thermostat.temperature());
+  }
+
+  function updatePowerSaving() {
+    switch(thermostat.isPowerSaving()) {
+      case true:
+        return "On"
+      case false:
+        return "Off"
+    }
   }
 
   updateTemperature();
@@ -20,5 +29,11 @@ $( document ).ready(function() {
   $('#temp-reset').on('click', function() {
     thermostat.resetTemperature();
     updateTemperature();
+  });
+
+  $('#toggle-power-saving').on('click', function() {
+    thermostat.togglePowerSaving();
+    updateTemperature();
+    $('#power_saving>p').text(updatePowerSaving());
   });
 });
