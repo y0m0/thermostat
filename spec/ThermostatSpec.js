@@ -31,14 +31,10 @@ describe("Thermostat", function() {
     expect(thermostat.isPowerSaving()).toBe(true);
   });
 
-  it("Can turn off power saving mode", function() {
-    thermostat.powerSavingOff();
+  it("Can toggle power saving mode", function() {
+    thermostat.togglePowerSaving();
     expect(thermostat.isPowerSaving()).toBe(false);
-  });
-
-  it("Can turn on power saving mode", function() {
-    thermostat.powerSavingOff();
-    thermostat.powerSavingOn();
+    thermostat.togglePowerSaving();
     expect(thermostat.isPowerSaving()).toBe(true);
   });
 
@@ -59,7 +55,7 @@ describe("Thermostat", function() {
   describe("Power Saving mode Off", function() {
 
     it("Restricts maximum temperature to 32 degrees", function() {
-      thermostat.powerSavingOff();
+      thermostat.togglePowerSaving();
       for(var i = 0; i < 12; i++) { thermostat.increaseTemperature(); }
       expect(function(){ thermostat.increaseTemperature(); }).toThrow(new Error('Maximum temperature is 32 degrees'));
     });

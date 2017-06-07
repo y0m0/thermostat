@@ -26,13 +26,9 @@ Thermostat.prototype.isPowerSaving = function() {
   return this.powerSaving;
 };
 
-Thermostat.prototype.powerSavingOff = function() {
-  this.powerSaving = false;
-};
-
-Thermostat.prototype.powerSavingOn = function() {
-  this.powerSaving = true;
-};
+Thermostat.prototype.togglePowerSaving = function() {
+  this.powerSaving = !this.powerSaving
+}
 
 Thermostat.prototype.resetTemperature = function() {
   this._temperature = this._DEFAULT_TEMPERATURE;
