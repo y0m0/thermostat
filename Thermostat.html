@@ -3,25 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <title>Thermostat</title>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src='src/Thermostat.js'></script>
   <script src='src/jQuery.js'></script>
   <script src="https://use.fontawesome.com/ede58373a1.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
   <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
-  <section>
-    <div class="display">
-      <h1>Thermostat</h1>
+<div class="columns">
+  <aside class="column is-2 aside hero is-fullheight is-hidden-mobile">
+    <div>
+      <div class="main">
+        <div class="title">Local Weather</div>
+          <div id="local-weather">
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" id="search-city" type="text" placeholder="Your city">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-search"></i>
+                </span>
+              </p>
+            </div>
+            <div>
+              <p><img id="local-weather-icon" src=""></p>
+              <p id="local-temperature"></p>
+              <p id="local-weather-description"></p>
+            </div>
+         </div>
+       </div>
+    </div>
+  </aside>
+  <div class="column is-10 admin-panel">
+    <nav class="nav has-shadow" id="top">
+      <div class="container">
+        <div class="nav-left">
+          <a class="nav-item" href="./Thermostat.html">
+            <h1 class="title">Thermostat</h1>
+          </a>
+        </div>
+        <span class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div class="nav-right nav-menu is-hidden-tablet">
+          <a href="#" class="nav-item is-active">
+            Dashboard
+          </a>
+          <a href="#" class="nav-item">
+            Activity
+          </a>
+          <a href="#" class="nav-item">
+            Timeline
+          </a>
+          <a href="#" class="nav-item">
+            Folders
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div>
       <div id="temperature">
         <h3>Temperature</h3>
         <p style="width: 20%;">20</p>
-      </div>
-      <div id="power_saving">
-        <h3>Power Saving Mode</h3>
-        <p>On</p>
       </div>
       <div id="energy">
         <h3>Energy usage</h3>
@@ -34,12 +79,19 @@
       <a id="temp-reset"><i class="fa fa-refresh" aria-hidden="true"></i></a>
       <a id="toggle-power-saving"><i class="fa fa-toggle-on" aria-hidden="true"></i></a>
     </div>
-  </section>
-    <div id="local-weather">
-      <input type="text" id="search-city" placeholder="Your city...">
-      <p><img id="local-weather-icon"></p>
-      <p id="local-temperature"></p>
-      <p id="local-weather-description"></p>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="has-text-centered">
+      <p>© 2017 y0m0</p>
+      <p>
+        <a class="icon" href="https://github.com/y0m0">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
     </div>
+  </div>
+</footer>
 </body>
 </html>
