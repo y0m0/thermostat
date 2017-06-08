@@ -2,12 +2,21 @@ $( document ).ready(function() {
   var thermostat = new Thermostat();
   var city;
 
-  $('#search-city').on('change paster keyup', function(){
+  $('#search-city').on('change paster', function(){
     city = $('#search-city').val();
-    $.get('http://api.openweathermap.org/data/2.5/weather?q='+ city +'&units=metric&appid=a012ce56b3fea36ffd408256d4eeb21a', function(data) {
-      $('#local-temperature').text(data.main.temp + '℃');
-    });
+    displayWeather(city);
   });
+
+  function displayWeather(city) {
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
+    var token = '&appid=a012ce56b3fea36ffd408256d4eeb21a';
+    var units = '&units=metric';
+    $.get(url + city + token + units, function(data) {
+      $('#local-temperature').text(data.main.temp + '℃');
+      $('#local-weather-icon').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+      $('#local-weather-description').text(data.weather[0].description);
+    });
+  };
 
   function updateTemperature() {
     $('#temperature>p').text(thermostat.temperature());
