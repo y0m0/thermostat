@@ -16,7 +16,7 @@ $( document ).ready(function() {
       $('#local-weather-icon').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
       $('#local-weather-description').text(data.weather[0].description);
     });
-  };
+  }
 
   function updateTemperature() {
     $('#temperature>p').text(thermostat.temperature());
