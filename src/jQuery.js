@@ -1,6 +1,10 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
 
+  $.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=a012ce56b3fea36ffd408256d4eeb21a', function(data) {
+    $('#local-temperature').text(data.main.temp);
+  });
+
   function updateTemperature() {
     $('#temperature>p').text(thermostat.temperature());
     $('#temperature>p').attr('class', thermostat.currentEnergyUsage());
