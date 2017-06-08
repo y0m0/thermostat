@@ -1,0 +1,28 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.low {
+  color: #fff;
+  background: #a3be8c;
+}
+
+.medium {
+  color: #fff;
+  background: #ffd466;
+}
+
+.high {
+  color: #fff;
+  background: #bf616a;
+}
+
+#temperature > p {
+  padding-left: 10px;
+}
+
+#temperature {
+
+}

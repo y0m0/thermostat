@@ -76,17 +76,17 @@ describe("Thermostat", function() {
 
     it("Returns 'Low usage' when temperature is <18 degrees", function() {
       spyOn(thermostat, 'temperature').and.returnValue(17);
-      expect(thermostat.currentEnergyUsage()).toEqual('Low');
+      expect(thermostat.currentEnergyUsage()).toEqual('low');
     });
 
     it("Returns 'Medium usage' when temperature is between 18 and 24 degrees", function() {
       spyOn(thermostat, 'temperature').and.returnValue(21);
-      expect(thermostat.currentEnergyUsage()).toEqual('Medium');
+      expect(thermostat.currentEnergyUsage()).toEqual('medium');
     });
 
     it("Returns 'High usage' when temperature is >24 degrees", function() {
       spyOn(thermostat, 'temperature').and.returnValue(30);
-      expect(thermostat.currentEnergyUsage()).toEqual('High');
+      expect(thermostat.currentEnergyUsage()).toEqual('high');
     });
   });
 });
