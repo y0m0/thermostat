@@ -1,8 +1,12 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
+  var city;
 
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=a012ce56b3fea36ffd408256d4eeb21a', function(data) {
-    $('#local-temperature').text(data.main.temp);
+  $('#search-city').on('change paster keyup', function(){
+    city = $('#search-city').val();
+    $.get('http://api.openweathermap.org/data/2.5/weather?q='+ city +'&units=metric&appid=a012ce56b3fea36ffd408256d4eeb21a', function(data) {
+      $('#local-temperature').text(data.main.temp + '℃');
+    });
   });
 
   function updateTemperature() {
