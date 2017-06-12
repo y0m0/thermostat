@@ -1,32 +1,24 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
   var city;
-  var state;
 
-
-  $.get('http://localhost:9292', function(data){
-    console.log('current ' + thermostat.powerSaving)
-    state = JSON.parse(data)
-    thermostat._temperature = state.temperature
-    thermostat.powerSaving = state.psm
-    city = state.city
-    console.log(typeof(state.psm))
-    console.log('new '+ thermostat.powerSaving)
-    updateTemperature()
-    // updatePowerSaving()
-    console.log('check')
-    updateEnergyUsage()
-    updateThermometer()
-  })
-
-  $('#search-city').on('change paster', function(){
-    city = $('#search-city').val();
+  $.getJSON('http://localhost:9292', function(data) {
+    thermostat._temperature = data.temperature;
+    thermostat.powerSaving = data.psm;
+    city = data.city;
+    updateUserInterface();
     displayWeather(city);
-    updateState();
   });
 
-  function updateState(){
-    $.post('http://localhost:9292', { state: {temperature: thermostat.temperature(), psm: thermostat.isPowerSaving(), city: city } } );
+  function storeSettings() {
+    var temperature = thermostat.temperature();
+    var powerSavingMode = thermostat.isPowerSaving();
+    $.ajax({
+      url     : 'http://localhost:9292',
+      dataType: 'json',
+      type    : 'POST',
+      data    : JSON.stringify({ temperature : temperature, psm: powerSavingMode, city : city })
+    });
   }
 
   function displayWeather(city) {
@@ -40,56 +32,67 @@ $( document ).ready(function() {
     });
   }
 
-  function updateTemperature() {
-    $('#temperature>p').text(thermostat.temperature());
-    $('#temperature>p').attr('class', thermostat.currentEnergyUsage());
+
+  // Updates the displayed values on the user interface
+
+  function updateUserInterface() {
+
+    function updateTemperature() {
+      $('#temperature>p').text(thermostat.temperature());
+      $('#temperature>p').attr('class', thermostat.currentEnergyUsage());
+    }
+
+    function updatePowerSaving() {
+      $('#toggle-power-saving i').attr('class', 'fa fa-toggle-' + (thermostat.isPowerSaving() ? 'on' : 'off'));
+    }
+
+    function updateEnergyUsage() {
+      $('#energy > p').text(thermostat.currentEnergyUsage());
+    }
+
+    function updateThermometer() {
+      $('#temperature > p').css("width", thermostat.temperature() + '%');
+    }
+
+    updateTemperature();
+    updatePowerSaving();
+    updateEnergyUsage();
+    updateThermometer();
   }
 
-  function updatePowerSaving() {
-    console.log(thermostat.isPowerSaving())
-    $('#toggle-power-saving i').attr('class', 'fa fa-toggle-' + (thermostat.isPowerSaving() == "true" ? 'on' : 'off'));
-  }
 
-  function updateEnergyUsage() {
-    $('#energy > p').text(thermostat.currentEnergyUsage());
-  }
 
-  function updateThermometer() {
-    $('#temperature > p').css("width", thermostat.temperature() + '%');
-  }
-
-  // updateTemperature();
+  // Event listeners
 
   $('#temp-up').on('click', function(){
     thermostat.increaseTemperature();
-    updateTemperature();
-    updateThermometer();
-    updateEnergyUsage();
-    updateState();
+    updateUserInterface();
+    storeSettings();
   });
 
   $('#temp-down').on('click', function() {
     thermostat.decreaseTemperature();
-    updateTemperature();
-    updateThermometer();
-    updateEnergyUsage();
-    updatePowerSaving()
-    updateState();
+    updateUserInterface();
+    storeSettings();
   });
 
   $('#temp-reset').on('click', function() {
     thermostat.resetTemperature();
-    updateTemperature();
-    updateThermometer();
-    updateEnergyUsage();
-    updateState();
+    updateUserInterface();
+    storeSettings();
   });
 
   $('#toggle-power-saving').on('click', function() {
-    thermostat.togglePowerSaving()
-    updateTemperature();
-    updateThermometer();
-    updatePowerSaving();
-    updateState();
+    thermostat.togglePowerSaving();
+    updateUserInterface();
+    storeSettings();
+  });
+
+  $('#search-city').on('change paster', function() {
+    city = $('#search-city').val();
+    displayWeather(city);
+    storeSettings();
   });
 });
+
+

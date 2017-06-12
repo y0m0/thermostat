@@ -74,10 +74,25 @@ body {
   background: #bf616a;
 }
 
-#temperature > p {
+.term-temp {
+  max-width: 60%;
+}
+
+/************
+  THERMOMETER
+*************/
+
+#thermometer {
+  border: 1px solid black;
+}
+
+#temperature {
   padding-left: 10px;
 }
 
+/************
+  CONTROLS
+*************/
 
 .control a i {
   font-size: 3em;
@@ -88,8 +103,25 @@ body {
   color: #3980b5;
 }
 
+#temp-down:hover {
+  color: #0A5C9B;
+}
+
 #temp-up {
   color: #bf616a;
+}
+
+#temp-up:hover {
+  color: #7B151F;
+}
+
+#temp-reset {
+  color: #00d1b2;
+}
+
+#toggle-power-saving:hover,
+#temp-reset:hover {
+  color: #00917D;
 }
 
 #toggle-power-saving .fa-toggle-off {
